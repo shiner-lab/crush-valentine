@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine Surprise</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ffd6e8, #fff1f7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.card {
+  background: #fff;
+  padding: 26px;
+  border-radius: 22px;
+  text-align: center;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  animation: fadeIn 0.8s ease;
+}
+
+h2 {
+  color: #ff4d8d;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.hidden { display: none; }
+
+.buttons {
+  margin-top: 24px;
+  position: relative;
+  height: 60px;
+}
+
+button {
+  padding: 10px 26px;
+  font-size: 16px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+button:hover { transform: scale(1.08); }
+
+#yesBtn {
+  background: #ff4d8d;
+  color: white;
+  z-index: 2;
+}
+
+#noBtn {
+  background: #e0e0e0;
+  color: #333;
+  position: fixed;
+}
+
+.bat {
+  position: fixed;
+  bottom: -30px;
+  font-size: 28px;
+  animation: flyUp 4s linear forwards;
+  pointer-events: none;
+}
+
+@keyframes flyUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120vh) scale(1.4);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>Will you be my Valentine, Shine? 💖</h2>
+
+  <p>
+    Dear Shine,<br><br>
+    Really wanna say this from very long but I think this is best day to reveal this…<br><br>
+    You are my crush since the first day I saw you on the stage wearing an elegant white shirt
+    giving a short reflection to Aditya sir’s class.<br><br>
+    I didn’t want this day to pass without telling you this and yeah, as I already said,
+    you have this way of standing out even without trying.<br><br>
+    Hope this message makes you smile and I just wanted you to know
+    you are kinda special to me 🫶🫶
+  </p>
+
+  <div class="buttons" id="buttons">
+    <button id="yesBtn">Yes 💕</button>
+    <button id="noBtn">No 🙈</button>
+  </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+
+function moveNo() {
+  const maxX = window.innerWidth - noBtn.offsetWidth;
+  const maxY = window.innerHeight - noBtn.offsetHeight;
+
+  noBtn.style.left = Math.random() * maxX + "px";
+  noBtn.style.top = Math.random() * maxY + "px";
+}
+
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
+
+yesBtn.addEventListener("click", () => {
+  document.getElementById("buttons").style.display = "none";
+
+  for (let i = 0; i < 30; i++) {
+    createBat();
+  }
+});
+
+function createBat() {
+  const bat = document.createElement("div");
+  bat.className = "bat";
+  bat.innerHTML = "🦇";
+  bat.style.left = Math.random() * 100 + "vw";
+  bat.style.animationDuration = 3 + Math.random() * 2 + "s";
+  document.body.appendChild(bat);
+
+  setTimeout(() => bat.remove(), 4000);
+}
+</script>
+
+</body>
+</html>
